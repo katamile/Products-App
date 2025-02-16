@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.orellana.products.Enums.StatusTransaccion;
+import com.orellana.products.Enums.TipoTransaccion;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,30 +17,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductsDTO {
+public class TransaccionesDTO {
 
-    private Long id;
+    private Long idTransaccion;
 
-    private Long idProducto;
-    private Long idCategoria;
-    private Long idLocal;
+    private Integer totalProductos;
 
-    private String nombre;
+    private BigDecimal totalPrecio;
 
-    private String codigoBarra;
+    private TipoTransaccion tipoTransaccion;
 
-    private BigDecimal price;
-
-    private Integer stockQuantity;
+    private StatusTransaccion status;
 
     private String description;
 
-    private String imageUrl;
-
-    private LocalDateTime expiryDate;
-
-    private  LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     private LocalDateTime createdAt;
+
+    private UserDTO user;
+
+    private ProductsDTO product;
+
+    //private 
 
 }

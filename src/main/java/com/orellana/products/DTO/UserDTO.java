@@ -1,10 +1,12 @@
 package com.orellana.products.DTO;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.orellana.products.Enums.UserRole;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,29 +17,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductsDTO {
+public class UserDTO {
 
-    private Long id;
+    private Long idUser;
 
-    private Long idProducto;
-    private Long idCategoria;
-    private Long idLocal;
+    private String name;
 
-    private String nombre;
+    private String email;
 
-    private String codigoBarra;
+    @JsonIgnore
+    private String password;
 
-    private BigDecimal price;
+    private String phoneNumber;
 
-    private Integer stockQuantity;
+    private UserRole role;
 
-    private String description;
-
-    private String imageUrl;
-
-    private LocalDateTime expiryDate;
-
-    private  LocalDateTime updatedAt;
+    private List<TransaccionesDTO> transactions;
 
     private LocalDateTime createdAt;
 
