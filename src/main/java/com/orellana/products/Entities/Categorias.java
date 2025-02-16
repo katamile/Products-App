@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Categorias")
+@Table(name = "categorias")
 public class Categorias extends crudBase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

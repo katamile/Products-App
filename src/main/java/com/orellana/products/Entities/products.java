@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Products")
+@Table(name = "products")
 public class Products extends crudBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

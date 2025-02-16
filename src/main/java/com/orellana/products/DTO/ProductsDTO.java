@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductsDTO {
 
-    private Long id;
+    private Long idProduct;
 
     private Long idProducto;
     private Long idCategoria;
@@ -29,7 +29,7 @@ public class ProductsDTO {
 
     private BigDecimal price;
 
-    private Integer stockQuantity;
+    private Integer stock;
 
     private String description;
 

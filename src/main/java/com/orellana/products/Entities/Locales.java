@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Locales")
+@Table(name = "locales")
 public class Locales extends crudBase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,10 +25,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Users")
+@Table(name = "users")
 public class User extends crudBase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUser") 
     private Long idUser;
 
     @NotBlank(message = "Nombre es requerido")
@@ -46,15 +47,13 @@ public class User extends crudBase{
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @OneToMany(mappedBy = "Users")
-    private List<Transacciones> transactions;
+    @OneToMany(mappedBy = "user")
+    private List<Transacciones> transacciones;
 
     @Override
     public String toString() {
-        return "User [id=" + idUser + ", name=" + nombre + ", email=" + email + ", password=" + password + ", phoneNumber="
-                + phoneNumber + ", role=" + role + "]";
+        return "User [idUser=" + idUser + ", nombre=" + nombre + ", email=" + email + ", password=" + password
+                + ", phoneNumber=" + phoneNumber + ", role=" + role + ", transacciones=" + transacciones + "]";
     }
 
-
-    
 }

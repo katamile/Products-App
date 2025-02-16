@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Transacciones")
+@Table(name = "transacciones")
 public class Transacciones extends crudBase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
