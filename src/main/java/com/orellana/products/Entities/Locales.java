@@ -1,10 +1,13 @@
 package com.orellana.products.Entities;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,8 +42,8 @@ public class Locales extends crudBase{
     
     private String telefono;
 
-    @OneToMany(mappedBy = "locales", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Categorias> categorias;
+    @OneToMany(mappedBy = "locales", fetch = FetchType.LAZY)
+    private Set<Categorias> categorias = new HashSet<>();
 
     @Override
     public String toString() {

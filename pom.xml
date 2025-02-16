@@ -95,6 +95,13 @@
 			<artifactId>modelmapper</artifactId>
 			<version>3.2.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>7.0.0.Beta4</version>
+			<type>pom</type>
+		</dependency>
 	</dependencies>
 
 	<build>

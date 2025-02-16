@@ -1,25 +1,25 @@
 package com.orellana.products.Services.ProductsServices;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.orellana.products.DTO.ProductsDTO;
 import com.orellana.products.DTO.Response;
 import com.orellana.products.Entities.Categorias;
+import com.orellana.products.Entities.Locales;
 import com.orellana.products.Entities.Products;
 import com.orellana.products.Exceptions.NotFoundException;
 import com.orellana.products.Repositories.CategoriasRepository;
+import com.orellana.products.Repositories.LocalesRepository;
 import com.orellana.products.Repositories.ProductsRepository;
 
-import java.io.File;
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
@@ -28,12 +28,17 @@ public class ProductsServices implements IProductsService {
     private final ProductsRepository productRepository;
     private final ModelMapper modelMapper;
     private final CategoriasRepository categoryRepository;
+    private final LocalesRepository localesRepository;
 
     @Override
     public Response saveProduct(ProductsDTO productDTO) {
         // Verificar existencia de la categoría
         Categorias category = categoryRepository.findById(productDTO.getIdCategoria())
                 .orElseThrow(() -> new NotFoundException("Category Not Found"));
+
+        // Verificar existencia del local
+        Locales local = localesRepository.findById(productDTO.getIdLocal())
+                .orElseThrow(() -> new NotFoundException("Local Not Found"));
 
         // Mapear DTO a entidad
         Products productToSave = Products.builder()
@@ -43,7 +48,8 @@ public class ProductsServices implements IProductsService {
                 .stock(productDTO.getStock())
                 .description(productDTO.getDescription())
                 .imageUrl(productDTO.getImageUrl())
-                .categorias(category)
+                .categoria(category)
+                .local(local)  // Asociar el local al producto
                 .build();
 
         // Guardar el producto en la base de datos
@@ -60,6 +66,13 @@ public class ProductsServices implements IProductsService {
         Products existingProduct = productRepository.findById(productDTO.getIdProducto())
                 .orElseThrow(() -> new NotFoundException("Product Not Found"));
 
+        // Verificar existencia del local
+        if (productDTO.getIdLocal() != null) {
+            Locales local = localesRepository.findById(productDTO.getIdLocal())
+                    .orElseThrow(() -> new NotFoundException("Local Not Found"));
+            existingProduct.setLocal(local); // Asociar el local al producto
+        }
+
         // Actualizar la imagen solo si se proporciona una URL
         if (productDTO.getImageUrl() != null && !productDTO.getImageUrl().isEmpty()) {
             existingProduct.setImageUrl(productDTO.getImageUrl());
@@ -69,7 +82,7 @@ public class ProductsServices implements IProductsService {
         if (productDTO.getIdCategoria() != null && productDTO.getIdCategoria() > 0) {
             Categorias category = categoryRepository.findById(productDTO.getIdCategoria())
                     .orElseThrow(() -> new NotFoundException("Category Not Found"));
-            existingProduct.setCategorias(category);
+            existingProduct.setCategoria(category);
         }
 
         // Actualizar los demás campos solo si se proporcionan

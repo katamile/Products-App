@@ -1,7 +1,5 @@
 package com.orellana.products.Services.ProductsServices;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.orellana.products.DTO.ProductsDTO;
 import com.orellana.products.DTO.Response;
 

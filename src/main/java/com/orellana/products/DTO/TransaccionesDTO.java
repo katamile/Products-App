@@ -39,6 +39,6 @@ public class TransaccionesDTO {
 
     private ProductsDTO product;
 
-    //private 
+    private LocalesDTO local;
 
 }

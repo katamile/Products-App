@@ -5,13 +5,16 @@ import java.util.List;
 import com.orellana.products.DTO.CategoriaDTO;
 import com.orellana.products.DTO.Response;
 import com.orellana.products.Entities.Categorias;
+import com.orellana.products.Entities.Locales;
 import com.orellana.products.Repositories.CategoriasRepository;
+import com.orellana.products.Repositories.LocalesRepository;
 import com.orellana.products.Exceptions.NotFoundException; // Importar la excepción personalizada
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -19,24 +22,32 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class CategoriaService implements ICategoriaService {
-
+    @Autowired
     private final CategoriasRepository categoryRepository;
+    @Autowired
     private final ModelMapper modelMapper;
+    @Autowired
+    private LocalesRepository localesRepository;
 
     @Override
     public Response createCategory(CategoriaDTO categoryDTO) {
+        // El resto del código permanece igual
+        Locales local = localesRepository.findById(1L)
+            .orElseThrow(() -> new RuntimeException("Local no encontrado"));
+        
         Categorias categoryToSave = modelMapper.map(categoryDTO, Categorias.class);
+        categoryToSave.setLocales(local);
         categoryRepository.save(categoryToSave);
-
+        
         return Response.builder()
                 .status(200)
                 .message("Categoria creada con éxito")
                 .build();
     }
-
+    
     @Override
     public Response getAllCategories() {
-        List<Categorias> categories = categoryRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        List<Categorias> categories = categoryRepository.findAll(Sort.by(Sort.Direction.DESC, "idCategoria"));
 
         List<CategoriaDTO> categoryDTOS = modelMapper.map(categories, new TypeToken<List<CategoriaDTO>>() {}.getType());
 

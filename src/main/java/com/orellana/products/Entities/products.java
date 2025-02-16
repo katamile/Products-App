@@ -50,12 +50,12 @@ public class Products extends crudBase {
     private LocalDateTime expiryDate;
 
     @ManyToOne
-    @JoinColumn(name = "idCategoria")
-    private Categorias categorias;
+    @JoinColumn(name = "id_categoria")
+    private Categorias categoria;
 
     @ManyToOne
-    @JoinColumn(name = "idLocal")
-    private Locales locales;
+    @JoinColumn(name = "id_local")
+    private Locales local;
 
     @Override
     public String toString() {

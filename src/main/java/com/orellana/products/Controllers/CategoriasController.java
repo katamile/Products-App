@@ -17,7 +17,6 @@ public class CategoriasController {
 
     private final ICategoriaService categoryService;
 
-
     @PostMapping("/add")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> createCategory(@RequestBody @Valid CategoriaDTO categoryDTO) {

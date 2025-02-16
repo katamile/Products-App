@@ -1,10 +1,11 @@
 package com.orellana.products.Entities;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,15 +38,13 @@ public class Categorias extends crudBase{
     @JoinColumn(name = "idLocal")
     private Locales locales;
 
-
-    @OneToMany(mappedBy = "categorias", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Products> products;
-
+    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
+    private Set<Products> productos = new HashSet<>();
 
     @Override
     public String toString() {
-        return "Categorias [idCategoria=" + idCategoria + ", nombre=" + nombre + ", locales=" + locales + ", products="
-                + products + "]";
+        return "Categorias [idCategoria=" + idCategoria + ", nombre=" + nombre + ", locales=" + locales + ", productos="
+                + productos + "]";
     }
     
 }

@@ -1,5 +1,7 @@
 package com.orellana.products.DTO;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -19,5 +21,8 @@ public class CategoriaDTO {
 
     @NotBlank(message = "Nombre es requerido")
     private String nombre;
+
+    private Long idLocal;
+    private List<ProductsDTO> productos;
 
 }

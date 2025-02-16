@@ -29,8 +29,8 @@ public class Response {
     private UserDTO user;
     private List<UserDTO> users;
 
-    // private SupplierDTO supplier;
-    // private List<SupplierDTO> suppliers;
+    private LocalesDTO local;
+    private List<LocalesDTO> locales;
 
     private CategoriaDTO category;
     private List<CategoriaDTO> categories;
